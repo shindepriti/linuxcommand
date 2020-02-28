@@ -1,0 +1,209 @@
+//AWK
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat data.csv  | awk '{ if ( $4 > 10000 )  print $2 "" $7 }'
+EmployeeNameTotalPay
+NATHANIEL567595
+GARY538909
+ALBERT335279
+CHRISTOPHER332343
+PATRICK326373
+DAVID316285
+ALSON315981
+DAVID307899
+JOANNE302377
+PATRICIA297608
+EDWARD294580
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat data.csv | grep -i captain | awk '{sum+=$7} {print sum}'
+538909
+874188
+1171796
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat data.csv | grep -i captain | awk '{sum+=$7}END{print sum}'
+1171796
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat data.csv  | awk '{ if  ( $5 > 7000 && $5 < 10000 )  print $3 "  "$5 }'
+DEPUTYCHIEF  9737
+ASSTDEPUTY  8601
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat data.csv | grep -i captain | awk '{sum+=$7}END{print sum/NR}'
+390599
+
+***********************************************************************************************************************************
+//execution status of HELLO and ls command
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ echo HELLO
+HELLO
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ echo $?
+0
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ ls 
+access.log     data.csv              linux_problem_sheet.pdf  temp
+checkFolde.sh  linux_chit_sheet.pdf  README.md
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ echo $?
+0
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ 
+***********************************************************************************************************************
+//ps 
+admin1@admin1-MobiComp-FH:~$ ps -eo pid,ppid,%mem,%cpu
+  PID  PPID %MEM %CPU
+    1     0  0.1  0.1
+    2     0  0.0  0.0
+    3     2  0.0  0.0
+    4     2  0.0  0.0
+    8     2  0.0  0.0
+    9     2  0.0  0.0
+   10     2  0.0  0.1
+   11     2  0.0  0.0
+   12     2  0.0  0.0
+   14     2  0.0  0.0
+   15     2  0.0  0.0
+   16     2  0.0  0.0
+   17     2  0.0  0.0
+   18     2  0.0  0.0
+   20     2  0.0  0.0
+   21     2  0.0  0.0
+   22     2  0.0  0.0
+   23     2  0.0  0.0
+   24     2  0.0  0.0
+   25     2  0.0  0.0
+  
+*****************************************************************************************************************************
+
+//diference in directory
+admin1@admin1-MobiComp-FH:~/Desktop$ cd terminal-commands/
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ mkdir original
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ mkdir updated
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ touch original-file.sh updated-fiole.sh
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ ls
+ abc       demo1           original-file.sh            updated
+ abc.txt   linux-content   temp                        updated-fiole.sh
+ demo      original       'terminal command problem'   xyz
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ cp original-file.sh original
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ ls original
+original-file.sh
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ cp updated-fiole.sh updated
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ ls updated
+updated-fiole.sh
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ diff original updated
+Only in original: original-file.sh
+Only in updated: updated-fiole.sh
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ cp original original-backup
+cp: -r not specified; omitting directory 'original'
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ cp -r  original original-backup
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ ls original-backup
+original-file.sh
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ cd original-backup/
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/original-backup$ cat > original-file.sh 
+priti
+shinde
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/original-backup$ cat original-file.sh 
+priti
+shinde
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/original-backup$ cd ..
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ diff updated original-backup/
+Only in original-backup/: original-file.sh
+Only in updated: updated-fiole.sh
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands$ 
+***************************************************************************************************************
+//sort and count and print unique 4 id's
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | awk '{print $1}'| sort -u
+10.56.0.3
+10.56.10.2
+10.56.1.3
+10.56.19.3
+10.56.21.2
+10.56.2.2
+10.56.22.3
+10.56.3.4
+10.56.34.4
+10.56.4.2
+10.56.44.4
+10.56.46.2
+10.56.5.2
+10.56.6.4
+10.56.9.3
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | awk '{print $1}'| sort | uniq -c | tail -4
+     40 10.56.46.2
+    168 10.56.5.2
+    285 10.56.6.4
+    186 10.56.9.3
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | awk '{print $1}'| sort | uniq -c | head -4
+    261 10.56.0.3
+    213 10.56.10.2
+    283 10.56.1.3
+    345 10.56.19.3
+
+
+****************************************************************************************************************************************
+//sort url and count and print first 4 ids
+@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort -u
+http://cloudsystemnetworks.com
+http://fundoopush-dev.bridgelabz.com/.well-known/acme-challenge/4xM-Y1899BrBIJ76P5Er2sj2VhEtyi_DFvfo6xiMXXw
+http://fundoopush-dev.bridgelabz.com/wp-login.php
+https://fundoopush-dev.bridgelabz.com/
+https://fundoopush-dev.bridgelabz.com/add-post
+https://fundoopush-dev.bridgelabz.com/dashboard/archive
+https://fundoopush-dev.bridgelabz.com/dashboard/article
+https://fundoopush-dev.bridgelabz.com/dashboard/hashtags/animals
+https://fundoopush-dev.bridgelabz.com/dashboard/jobs
+https://fundoopush-dev.bridgelabz.com/login
+http://www.google.com/bot.html
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | grep -Eo "(http|https)://[a-zA-Z0-9./?=_-]*" | sort | uniq -c | tail -4
+      1 https://fundoopush-dev.bridgelabz.com/dashboard/hashtags/animals
+      5 https://fundoopush-dev.bridgelabz.com/dashboard/jobs
+   1475 https://fundoopush-dev.bridgelabz.com/login
+     74 http://www.google.com/bot.html
+*****************************************************************************************************************************
+//sort and count response code print code
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | awk -F " " '{print $9}' | sort | uniq -c
+   3176 200
+      8 206
+     26 304
+
+***********************************************************************************************************
+//modified before 7 days
+admin1@admin1-MobiComp-FH:~/Desktop$ find -mtime +7
+./demo.txt
+admin1@admin1-MobiComp-FH:~/Desktop$ mv demo.txt backup
+admin1@admin1-MobiComp-FH:~/Desktop$ ls
+backup  practice.txt  terminal-commands
+admin1@admin1-MobiComp-FH:~/Desktop$ ls backup/
+demo.txt
+
+*******************************************************************************************************
+//serach and count word
+admin1@admin1-MobiComp-FH:~/Desktop/terminal-commands/linux-content$ cat access.log | grep -c system
+6
+****************************************************************************************************************
+// Get info from /etc/passwd and change ownership
+admin1@admin1-MobiComp-FH:/etc$ cat passwd
+hplip:x:119:7:HPLIP system user,,,:/var/run/hplip:/bin/false
+geoclue:x:120:125::/var/lib/geoclue:/usr/sbin/nologin
+pulse:x:121:126:PulseAudio daemon,,,:/var/run/pulse:/usr/sbin/nologin
+gnome-initial-setup:x:122:65534::/run/gnome-initial-setup/:/bin/false
+gdm:x:123:128:Gnome Display Manager:/var/lib/gdm3:/bin/false
+admin1:x:1000:1000:admin,,,:/home/admin1:/bin/bash
+systemd-coredump:x:999:999:systemd Core Dumper:/:/sbin/nologin
+admin1@admin1-MobiComp-FH:/etc$ userId=$(cat passwd | awk -F ':' '$3>=1000 {print $1}')
+admin1@admin1-MobiComp-FH:/etc$ homeDirectory=$(cat passwd | awk -F ':' '$3>1000 {print $6}')
+admin1@admin1-MobiComp-FH:/etc$ echo $userId $homeDirectory
+nobody admin1 /data/project
+admin1@admin1-MobiComp-FH:/etc$ cat passwd | grep nobody   //no change
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+admin1@admin1-MobiComp-FH:/etc$ sudo usermod -u 1005 -g 126 -d /data/project -e 2014-03-27 nobody  //change user mode
+[sudo] password for admin1: 
+admin1@admin1-MobiComp-FH:/etc$ cat passwd | grep nobody
+nobody:x:1005:126:nobody:/data/project:/usr/sbin/nologin
+*******************************************************************************************************************
+// whatis apropos type which whereis commands
+admin1@admin1-MobiComp-FH:/etc$ whatis mkdir
+mkdir (1)            - make directories
+mkdir (2)            - create a directory
+admin1@admin1-MobiComp-FH:/etc$ apropos mkdir
+gvfs-mkdir (1)       - (unknown subject)
+mkdir (1)            - make directories
+mkdir (2)            - create a directory
+mkdirat (2)          - create a directory
+
+admin1@admin1-MobiComp-FH:/etc$ type mkdir
+mkdir is /usr/bin/mkdir
+admin1@admin1-MobiComp-FH:/etc$ which mkdir
+/usr/bin/mkdir
+admin1@admin1-MobiComp-FH:/etc$ whereis  mkdir
+mkdir: /usr/bin/mkdir /usr/share/man/man2/mkdir.2.gz /usr/share/man/man1/mkdir.1.gz
+
+
